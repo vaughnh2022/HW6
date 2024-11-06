@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Vaughn Hartzell 001
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -150,9 +150,10 @@ class PriorityQueue<E, P> {
      */
 
     public Node add(E e, P priority) {
-
-        // YOUR CODE GOES HERE
-        return null;
+        Node newNode = new Node(e, priority,tree.size());
+        tree.add(newNode);
+        pullUp(tree.size()-1);
+        return newNode;
     }
 
 
@@ -167,8 +168,11 @@ class PriorityQueue<E, P> {
      */
 
     public boolean contains(E e) {
-
-        // ADD YOUR CODE HERE
+        for (int i=0 ; i < size() ; i++) {
+            if(tree.get(i).value.equals(e)){
+                return true;
+            }
+        }
         return false;
     }
 

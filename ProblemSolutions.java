@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Vaughn Hartzell 001
  *
  *   This java file contains the problem solutions for the methods lastBoulder,
  *   showDuplicates, and pair methods. You should utilize the Java Collection
@@ -68,7 +68,22 @@ public class ProblemSolutions {
       //
       // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME / SECTION # ABOVE
       //
-      return -1;
+      PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+      for(int a : boulders){
+        pq.add(a);
+      }
+      while(pq.size()>1){
+        int x =pq.poll();
+        int y=pq.poll();
+        if(x!=y){
+            x=x-y;
+            pq.add(x);
+        }
+      }
+      if(pq.isEmpty()){
+        return 0;
+      }
+      return pq.poll();
   }
 
 
@@ -91,10 +106,17 @@ public class ProblemSolutions {
 
     public static ArrayList<String> showDuplicates(ArrayList<String> input) {
 
-        //
-        //  YOUR CODE GOES HERE
-        //
-        return new ArrayList<>();  // Make sure result is sorted in ascending order
+        ArrayList<String> ans = new ArrayList<>();
+        HashSet<String> mainSet = new HashSet<>();
+        HashSet<String> dupSet = new HashSet<>();
+        for(int a=0;a<input.size();a++){
+            if(mainSet.contains(input.get(a))&&!dupSet.contains(input.get(a))){
+                dupSet.add(input.get(a));
+                ans.add(input.get(a));
+            }
+            mainSet.add(input.get(a));
+        }
+        return ans;  // Make sure result is sorted in ascending order
 
     }
 
@@ -134,6 +156,17 @@ public class ProblemSolutions {
         //
         //  YOUR CODE GOES HERE
         //
-        return new ArrayList<>();  // Make sure returned lists is sorted as indicated above
+        HashSet<String> ans= new HashSet<>();
+        HashSet<Integer> set = new HashSet<>();
+        Arrays.sort(input);
+        for(int a=input.length-1;a>-1;a--){
+            if(set.contains(k-input[a])){
+                ans.add("("+input[a]+", "+(k-input[a])+")");
+            }
+            set.add(input[a]);
+        }
+        ArrayList<String> nAns = new ArrayList<>(ans);
+        Collections.sort(nAns);
+        return nAns;  // Make sure returned lists is sorted as indicated above
     }
 }
